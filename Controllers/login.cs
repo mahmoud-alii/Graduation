@@ -7,14 +7,21 @@ namespace GradProject.Controllers
     [Route("[controller]")]
     public class Login : ControllerBase
     {
-        public class LoginModel
+        public class Person
         {
             public int Id { get; set; }
             public string Pass { get; set; }
+            public int Type { get; set; }
+        }
+
+        public class Instructor : Person
+        {
+            private string Email { get; set; }
+            private bool IsDoctor { get; set; }
         }
 
         [HttpPost]
-        public IActionResult Authenticate([FromBody] LoginModel login)
+        public IActionResult Authenticate([FromBody] Person login)
         {
             int type = 0;
 
