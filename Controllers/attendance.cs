@@ -1,39 +1,22 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
+using static Graduation.Controllers.Login;
 
 namespace Graduation.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class Login : ControllerBase
+    public class attendance : ControllerBase
     {
-        public class Person
-        {
-            public int Id { get; set; }
-            public string Pass { get; set; }
-            public int Type { get; set; }
-        }
-
-        public class Instructor : Person
-        {
-            private string Email { get; set; }
-            private bool IsDoctor { get; set; }
-        }
-
-        public class Student : Person
-        {
-
-        }
-
         [HttpPost]
-        public IActionResult Authenticate([FromBody] Person person)
+        public IActionResult RegisterAttendance([FromBody] Student student)
         {
-            int type = 0;
+            String pass = "";
 
             MySqlConnection cnn;
             String trial = @"server=127.0.0.1;database=aast;userid=root;password=;";
             cnn = new MySqlConnection(trial);
-            string query = $"SELECT type FROM aast_person WHERE id='{person.Id}' AND pass='{person.Pass}'";
+            string query = $"SELECT pass FROM aast_person WHERE id='{student.Id}' AND type='1'";
             MySqlCommand command = new MySqlCommand(query, cnn);
 
             try
@@ -45,7 +28,7 @@ namespace Graduation.Controllers
                 {
                     while (reader.Read())
                     {
-                        type = int.Parse(reader.GetString(0));
+                        pass = reader.GetString(0);
                     }
                 }
                 reader.Close();
@@ -55,10 +38,10 @@ namespace Graduation.Controllers
             {
                 Console.WriteLine("Error" + e.Message);
             }
-            Console.WriteLine(type); //to check the output of invalid login
+
             cnn.Close();
 
-            return Ok(new { AccountType = type });
+            return Ok(new { AttendancePass = pass });
         }
     }
 }
