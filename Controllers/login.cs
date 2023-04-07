@@ -17,13 +17,13 @@ namespace Graduation.Controllers
         public class Instructor : Person
         {
             private string Email { get; set; }
-            private bool IsDoctor { get; set; }
         }
 
         public class Student : Person
         {
 
         }
+
 
         [HttpPost]
         public IActionResult Authenticate([FromBody] Person person)
