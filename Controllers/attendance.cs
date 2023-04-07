@@ -12,7 +12,6 @@ namespace Graduation.Controllers
         public IActionResult RegisterAttendance([FromBody] Student student)
         {
             String pass = "";
-             //Omar
             MySqlConnection cnn;
             String trial = @"server=127.0.0.1;database=aast;userid=root;password=;";
             cnn = new MySqlConnection(trial);
