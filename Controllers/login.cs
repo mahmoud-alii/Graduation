@@ -31,9 +31,9 @@ namespace Graduation.Controllers
             int type = 0;
 
             MySqlConnection cnn;
-            String trial = @"server=127.0.0.1;database=aast;userid=root;password=;";
+            String trial = @"server=127.0.0.1;database=attendance;userid=root;password=;";
             cnn = new MySqlConnection(trial);
-            string query = $"SELECT type FROM aast_person WHERE id='{person.Id}' AND pass='{person.Pass}'";
+            string query = $"SELECT type FROM person WHERE id='{person.Id}' AND pass='{person.Pass}'";
             MySqlCommand command = new MySqlCommand(query, cnn);
 
             try

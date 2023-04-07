@@ -13,9 +13,9 @@ namespace Graduation.Controllers
         {
             String pass = "";
             MySqlConnection cnn;
-            String trial = @"server=127.0.0.1;database=aast;userid=root;password=;";
+            String trial = @"server=127.0.0.1;database=attendance;userid=root;password=;";
             cnn = new MySqlConnection(trial);
-            string query = $"SELECT pass FROM aast_person WHERE id='{student.Id}' AND type='1'";
+            string query = $"SELECT pass FROM person WHERE id='{student.Id}' AND type='1'";
             MySqlCommand command = new MySqlCommand(query, cnn);
 
             try
