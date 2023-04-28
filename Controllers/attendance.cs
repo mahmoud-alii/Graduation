@@ -47,7 +47,8 @@ namespace Graduation.Controllers
             cnn = new MySqlConnection(trial);
             string query = $"SELECT CASE WHEN EXISTS (SELECT * FROM takes WHERE student_id= '{takes.student_id}' AND course_code = '{takes.course_code}' AND class_no = '{takes.class_no}') THEN 'TRUE' ELSE 'FALSE' END ";
             MySqlCommand command = new MySqlCommand(query, cnn);
-
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = await client.GetAsync("https://localhost:7195/api/GetStudentID" + stundent_id);
             try
             {
                 cnn.Open();
@@ -68,8 +69,21 @@ namespace Graduation.Controllers
                 Console.WriteLine("Error" + e.Message);
             }
 
-            cnn.Close();
+            
 
+            if (x== true)
+            {
+                string sql = "INSERT INTO attendance (student_id,schedule_id,status) VALUES (@Value1, @Value2 , @value3)";
+                command.Parameters.AddWithValue("@Value1", "Hello");
+                command.Parameters.AddWithValue("@Value2", "World");
+                command.Parameters.AddWithValue("@Value3", "World");
+                command.ExecuteNonQuery();
+            }
+            else
+            {
+
+            }
+            cnn.Close();
             return Ok(new
             {
                 isFound = x

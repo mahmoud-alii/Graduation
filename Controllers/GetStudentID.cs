@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using static Graduation.Controllers.attendance;
 using MySql.Data.MySqlClient;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Graduation.Controllers
 {
@@ -10,7 +11,7 @@ namespace Graduation.Controllers
     public class GetStudentID : ControllerBase
     {
         [HttpPost]
-        public IActionResult getStudentID([FromBody] Nfc_serial nfc_Serial, int student_id)
+        public IActionResult getStudentID([FromBody] Nfc_serial nfc_Serial, int student_id )
         {
 
             MySqlConnection cnn;
@@ -18,7 +19,6 @@ namespace Graduation.Controllers
             cnn = new MySqlConnection(trial);
             string query = $"SELECT student_id FROM nfc_serial WHERE serial_no='{nfc_Serial.serial_no}'";
             MySqlCommand command = new MySqlCommand(query, cnn);
-
             try
             {
                 cnn.Open();
