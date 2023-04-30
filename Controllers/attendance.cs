@@ -40,10 +40,10 @@ namespace Graduation.Controllers
         }
         public class Attendance
         {
+            public int attendance_id { get; set; }
             public int student_id { get; set; }
             public int schedule_id { get; set; }
-            public int week { get; set; }
-            public string status { get; set; }
+            public int week_no { get; set; }
         }
         [HttpPost]
         public IActionResult AuthenticateStudent_takeattendance([FromBody] Takes takes,Attendance attendance )
@@ -78,11 +78,10 @@ namespace Graduation.Controllers
 
             if (x = true)
             {
-                string sql = "INSERT INTO attendance (student_id,schedule_id,week,status) VALUES (@Value1, @Value2 , @value3 , @value4)";
+                string sql = "INSERT INTO attendance (student_id,schedule_id,week_no) VALUES (@Value1, @Value2 , @value3 )";
                 command.Parameters.AddWithValue("@Value1", attendance.student_id);
                 command.Parameters.AddWithValue("@Value2", attendance.schedule_id);
-                command.Parameters.AddWithValue("@Value3", attendance.week);
-                command.Parameters.AddWithValue("@Value4", "Present");
+                command.Parameters.AddWithValue("@Value3", attendance.week_no);
                 command.ExecuteNonQuery();
                 cnn.Close();
                 var message = new { message = "Attendance have been taken" };
@@ -90,10 +89,11 @@ namespace Graduation.Controllers
             }
             else
             {
+                cnn.Close();
                 var message = new { message = "the student is not in this class" };
                 return Ok(message);
             }
-            cnn.Close();
+            
         }
     }
 }
