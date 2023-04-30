@@ -10,10 +10,9 @@ namespace Graduation.Controllers
     public class GetClassNo : ControllerBase
     {
         [HttpPost]
-        public IActionResult getClassNo([FromBody] Schedules schedules)
+        public IActionResult getClassNo([FromBody] Schedules schedules, string schedule_id)
         {
             String class_no = "";
-            String schedule_id = "";
             MySqlConnection cnn;
             String trial = @"server=127.0.0.1;database=attendance;userid=root;password=;";
             cnn = new MySqlConnection(trial);
