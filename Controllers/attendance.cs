@@ -9,9 +9,6 @@ namespace Graduation.Controllers
     [Route("[controller]")]
     public class attendance : ControllerBase
     {
-        private string student_id;
-        private string schedule_id;
-
         public class Schedules
         {
             public int schedule_id { get; set; }
