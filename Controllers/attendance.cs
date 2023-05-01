@@ -46,9 +46,9 @@ namespace Graduation.Controllers
             public int week_no { get; set; }
         }
         [HttpPost]
-        public IActionResult AuthenticateStudent_takeattendance([FromBody] Takes takes,Attendance attendance )
+        public IActionResult AuthenticateStudent_takeattendance([FromHeader] Takes takes, [FromBody] Attendance attendance )
         {
-            Boolean x ;
+            Boolean x = false;
             MySqlConnection cnn;
             String trial = @"server=127.0.0.1;database=attendance;userid=root;password=;";
             cnn = new MySqlConnection(trial);
@@ -76,13 +76,14 @@ namespace Graduation.Controllers
 
 
 
-            if (x = true)
+            if (x == true)
             {
                 string sql = "INSERT INTO attendance (student_id,schedule_id,week_no) VALUES (@Value1, @Value2 , @value3 )";
-                command.Parameters.AddWithValue("@Value1", attendance.student_id);
-                command.Parameters.AddWithValue("@Value2", attendance.schedule_id);
-                command.Parameters.AddWithValue("@Value3", attendance.week_no);
-                command.ExecuteNonQuery();
+                MySqlCommand cmd = new MySqlCommand(sql, cnn);
+                cmd.Parameters.AddWithValue("@Value1", attendance.student_id);
+                cmd.Parameters.AddWithValue("@Value2", attendance.schedule_id);
+                cmd.Parameters.AddWithValue("@Value3", attendance.week_no);
+                cmd.ExecuteNonQuery();
                 cnn.Close();
                 var message = new { message = "Attendance have been taken" };
                 return Ok(message);
