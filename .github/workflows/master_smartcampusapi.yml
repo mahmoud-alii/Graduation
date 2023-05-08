@@ -53,5 +53,5 @@ jobs:
         with:
           app-name: 'SmartCampusAPI'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_A19B4D104F3F480CA7DC7C0EF5B8D936 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_4D6649E4E3AA421FBC2DB7D795E9E4BE }}
           package: .
