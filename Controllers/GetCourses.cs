@@ -16,7 +16,7 @@ namespace Graduation.Controllers
             var courses = new ArrayList();
             int i = 0;
             MySqlConnection cnn;
-            String trial = @"server=127.0.0.1;database=attendance;userid=root;password=;";
+            String trial = @"server=smart-campus.cewocktbczjl.us-east-1.rds.amazonaws.com;database=AAST;userid=admin;password=smart-campusadmin;";
             cnn = new MySqlConnection(trial);
             string query = $"SELECT course_code FROM teaches WHERE instructor_id='{teaches.instructor_id}'";
             MySqlCommand command = new MySqlCommand(query, cnn);

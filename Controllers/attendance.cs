@@ -50,7 +50,7 @@ namespace Graduation.Controllers
         {
             Boolean x = false;
             MySqlConnection cnn;
-            String trial = @"server=127.0.0.1;database=attendance;userid=root;password=;";
+            String trial = @"server=smart-campus.cewocktbczjl.us-east-1.rds.amazonaws.com;database=AAST;userid=admin;password=smart-campusadmin;";
             cnn = new MySqlConnection(trial);
             string query = $"SELECT CASE WHEN EXISTS (SELECT * FROM takes WHERE student_id= '{takes.student_id}' AND course_code = '{takes.course_code}' AND class_no = '{takes.class_no}') THEN 'TRUE' ELSE 'FALSE' END ";
             MySqlCommand command = new MySqlCommand(query, cnn);          

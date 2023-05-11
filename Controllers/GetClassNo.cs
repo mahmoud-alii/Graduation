@@ -15,7 +15,7 @@ namespace Graduation.Controllers
             String class_no = "";
             String schedule_id = "";
             MySqlConnection cnn;
-            String trial = @"server=127.0.0.1;database=attendance;userid=root;password=;";
+            String trial = @"server=smart-campus.cewocktbczjl.us-east-1.rds.amazonaws.com;database=AAST;userid=admin;password=smart-campusadmin;";
             cnn = new MySqlConnection(trial);
             string query = $"SELECT class_no, schedule_id FROM schedules WHERE course_code='{schedules.course_code}' AND instructor_id='{schedules.instructor_id}' AND slots='{schedules.slots}'";
             MySqlCommand command = new MySqlCommand(query, cnn);

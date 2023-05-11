@@ -14,7 +14,7 @@ namespace Graduation.Controllers
         {
             String pass = "";
             MySqlConnection cnn;
-            String trial = @"server=127.0.0.1;database=attendance;userid=root;password=;";
+            String trial = @"server=smart-campus.cewocktbczjl.us-east-1.rds.amazonaws.com;database=AAST;userid=admin;password=smart-campusadmin;";
             cnn = new MySqlConnection(trial);
             string query = $"SELECT pass FROM person WHERE id='{person.Id}' AND type='{person.Type}'";
             MySqlCommand command = new MySqlCommand(query, cnn);

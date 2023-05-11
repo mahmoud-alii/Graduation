@@ -15,7 +15,7 @@ namespace Graduation.Controllers
         {
             int student_id = 0;
             MySqlConnection cnn;
-            String trial = @"server=127.0.0.1;database=attendance;userid=root;password=;";
+            String trial = @"server=smart-campus.cewocktbczjl.us-east-1.rds.amazonaws.com;database=AAST;userid=admin;password=smart-campusadmin;";
             cnn = new MySqlConnection(trial);
             string query = $"SELECT student_id FROM nfc_serial WHERE serial_no='{nfc_Serial.serial_no}'";
             MySqlCommand command = new MySqlCommand(query, cnn);

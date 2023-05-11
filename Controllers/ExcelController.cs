@@ -13,7 +13,7 @@ namespace YourNamespace.Controllers
         [HttpGet]
         public FileContentResult Get()
         {
-            var connectionString = @"server=127.0.0.1;database=attendance;userid=root;password=;";
+            var connectionString = @"server=smart-campus.cewocktbczjl.us-east-1.rds.amazonaws.com;database=AAST;userid=admin;password=smart-campusadmin;";
             var fileName = "attendance.xlsx";
 
             using (var package = new ExcelPackage())
