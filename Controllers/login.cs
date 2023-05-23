@@ -25,7 +25,7 @@ namespace Graduation.Controllers
         }
 
 
-        [HttpGet]
+        [HttpPost]
         public IActionResult Authenticate([FromBody] Person person)
         {
             int type = 0;
