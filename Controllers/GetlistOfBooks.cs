@@ -16,13 +16,13 @@ namespace Graduation.Controllers
 
         public class Borrowed_books
         {
-            public int student_id { get; set; }
-            public DateOnly borrowed_date { get; set; }
-            public DateOnly due_date { get; set; }
+            public int borrowing_id { get; set; }
             public int book_id { get; set; }
-            public DateOnly returned_time { get; set; }
-            public decimal penalty { get; set; } 
-            public int borrowing_id { get; set; } 
+            public int student_id { get; set; }
+            public DateTime borrowed_date { get; set; }
+            public DateTime due_date { get; set; }
+            public DateTime returned_time { get; set; }
+            public decimal penalty { get; set; }  
 
         }
         
@@ -44,13 +44,13 @@ namespace Graduation.Controllers
                 {
                     while (reader.Read())
                     {
-                        borrowedlist.Add(reader.GetString(0));
-                        borrowedlist.Add(reader.GetString(1));
-                        borrowedlist.Add(reader.GetString(2));
-                        borrowedlist.Add(reader.GetString(3));
-                        borrowedlist.Add(reader.GetString(4));
-                        borrowedlist.Add(reader.GetString(5));
-                        borrowedlist.Add(reader.GetString(6));
+                        borrowedlist.Add(reader.GetInt32(0));
+                        borrowedlist.Add(reader.GetInt32(1));
+                        borrowedlist.Add(reader.GetInt32(2));
+                        borrowedlist.Add(reader.GetDateTime(3));
+                        borrowedlist.Add(reader.GetDateTime(4));
+                        borrowedlist.Add(reader.GetDateTime(5));
+                        borrowedlist.Add(reader.GetDecimal(6));
                     }
                 }
                 reader.Close();
