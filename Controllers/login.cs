@@ -31,9 +31,9 @@ namespace Graduation.Controllers
             int type = 0;
 
             MySqlConnection cnn;
-            String trial = @"server=smart-campus.cewocktbczjl.us-east-1.rds.amazonaws.com;database=AAST;userid=admin;password=smart-campusadmin;";
+            String trial = @"server=aast-db.cf4afzenuusl.us-east-1.rds.amazonaws.com;database=attendace;userid=ahmed_admin;password=777888999;";
             cnn = new MySqlConnection(trial);
-            string query = $"SELECT type FROM person WHERE id='{person.Id}' AND pass='{person.Pass}'";
+            string query = $"SELECT is_doctor FROM users WHERE user_id='{person.Id}' AND password='{person.Pass}'";
             MySqlCommand command = new MySqlCommand(query, cnn);
 
             try
