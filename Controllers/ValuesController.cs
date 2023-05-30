@@ -16,7 +16,7 @@ namespace Graduation.Controllers
             MySqlConnection cnn;
             String trial = @"server=smart-campus.cewocktbczjl.us-east-1.rds.amazonaws.com;database=AAST;userid=admin;password=smart-campusadmin;";
             cnn = new MySqlConnection(trial);
-            string query = $"SELECT pass FROM person WHERE id='{person.Id}' AND type='{person.Type}'";
+            string query = $"SELECT pass FROM person WHERE id='{person.user_id}' AND is_doctor='{person.is_doctor}'";
             MySqlCommand command = new MySqlCommand(query, cnn);
 
             try

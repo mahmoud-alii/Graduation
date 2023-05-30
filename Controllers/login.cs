@@ -9,9 +9,9 @@ namespace Graduation.Controllers
     {
         public class Person
         {
-            public int Id { get; set; }
-            public string Pass { get; set; }
-            public int Type { get; set; }
+            public int user_id { get; set; }
+            public string password { get; set; }
+            public int is_doctor { get; set; }
         }
 
         public class Instructor : Person
@@ -28,12 +28,11 @@ namespace Graduation.Controllers
         [HttpPost]
         public IActionResult Authenticate([FromBody] Person person)
         {
-            int type = 0;
-
+            int doctor = 5;
             MySqlConnection cnn;
-            String trial = @"server=aast-db.cf4afzenuusl.us-east-1.rds.amazonaws.com;database=attendace;userid=ahmed_admin;password=777888999;";
+            String trial = @"server=aast-db.cf4afzenuusl.us-east-1.rds.amazonaws.com;database=attendance;userid=ahmed_admin;password=777888999;";
             cnn = new MySqlConnection(trial);
-            string query = $"SELECT is_doctor FROM users WHERE user_id='{person.Id}' AND password='{person.Pass}'";
+            string query = $"SELECT is_doctor FROM users WHERE user_id='{person.user_id}' AND password='{person.password}'";
             MySqlCommand command = new MySqlCommand(query, cnn);
 
             try
@@ -45,7 +44,7 @@ namespace Graduation.Controllers
                 {
                     while (reader.Read())
                     {
-                        type = int.Parse(reader.GetString(0));
+                        doctor =reader.GetInt32(0);
                     }
                 }
                 reader.Close();
@@ -55,10 +54,10 @@ namespace Graduation.Controllers
             {
                 Console.WriteLine("Error" + e.Message);
             }
-            Console.WriteLine(type); //to check the output of invalid login
+            Console.WriteLine(doctor); //to check the output of invalid login
             cnn.Close();
 
-            return Ok(new { AccountType = type });
+            return Ok(new { AccountType = doctor });
         }
     }
 }
