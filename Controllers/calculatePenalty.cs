@@ -24,8 +24,6 @@ namespace Graduation.Controllers
         [HttpPost]
         public IActionResult getlistOfBooks([FromBody] Borrowed_books borrowed_books)
         {
-            DateOnly date;
-            DateOnly date2;
             DateTime x = new DateTime();
             DateTime y = new DateTime();
             TimeSpan difference = new TimeSpan() ;
