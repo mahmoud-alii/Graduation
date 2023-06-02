@@ -10,6 +10,8 @@ using System.Data;
 using OfficeOpenXml.FormulaParsing.Excel.Functions.DateTime;
 using MySqlX.XDevAPI.Common;
 using System.Web.Http.Results;
+using System;
+
 
 namespace Graduation.Controllers
 {
@@ -22,30 +24,32 @@ namespace Graduation.Controllers
         [HttpPost]
         public IActionResult getlistOfBooks([FromBody] Borrowed_books borrowed_books)
         {
-            DateTime x = new DateTime() ;
-            DateTime y = new DateTime() ;
+            DateOnly date;
+            DateOnly date2;
+            DateTime x = new DateTime();
+            DateTime y = new DateTime();
             TimeSpan difference = new TimeSpan() ;
             MySqlConnection cnn;
+            //String trial = @"server=127.0.0.1;database=attendance;userid=root;password=;";
             String trial = @"server=aast-db.cf4afzenuusl.us-east-1.rds.amazonaws.com;database=library;userid=ahmed_admin;password=777888999;";
             cnn = new MySqlConnection(trial);
-            string query = $"SELECT due_date  FROM library.borrowed_books WHERE student_id='{borrowed_books.student_id}'and book_id'{borrowed_books.book_id}'";
+            string query = $"SELECT due_date , returned_date  FROM borrowed_books WHERE student_id='{borrowed_books.student_id}'AND book_id='{borrowed_books.book_id}' ";
             MySqlCommand command = new MySqlCommand(query, cnn);
-            string query2 = $"SELECT returned_date  FROM library.borrowed_books WHERE student_id='{borrowed_books.student_id}'and book_id'{borrowed_books.book_id}'";
-            MySqlCommand command2 = new MySqlCommand(query2, cnn);
+
             try
             {
                 cnn.Open();
                 MySqlDataReader reader = command.ExecuteReader();
-                MySqlDataReader reader2 = command2.ExecuteReader();
+
 
                 if (reader.HasRows)
                 {
                     while (reader.Read())
                     {
-                         x = reader.GetDateTime(0);
-                         y = reader2.GetDateTime(0);
 
-                        difference = y-x ;
+                         x = reader.GetDateTime(0);
+                         y = reader.GetDateTime(1); 
+                        difference = y - x ;
                     }
                 }
                 reader.Close();
@@ -60,9 +64,8 @@ namespace Graduation.Controllers
 
             if (total_days > 0)
             {
-                string sql = "INSERT INTO library (penalty) VALUES (@Value1 )";
+                string sql = $"UPDATE borrowed_books SET penalty = '{total_days}' WHERE student_id='{borrowed_books.student_id}'AND book_id='{borrowed_books.book_id}'"; 
                 MySqlCommand cmd = new MySqlCommand(sql, cnn);
-                cmd.Parameters.AddWithValue("@Value1", total_days);
                 cmd.ExecuteNonQuery();
                 cnn.Close();
                 var message = new { message = "penalty added" };
@@ -75,6 +78,8 @@ namespace Graduation.Controllers
                 string result = $"The difference between {x.ToShortDateString()} and {y.ToShortDateString()} is {difference.TotalDays} days.";
                 return Ok(result);
             }
+            //string result = $"The difference between {x.ToShortDateString} and {y.ToShortDateString} is {difference.TotalDays} days.";
+            //return Ok(result);
         }
     }
 }
