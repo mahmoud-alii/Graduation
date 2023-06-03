@@ -51,59 +51,62 @@ namespace Graduation.Controllers
 
                        total_days = (int)difference.TotalDays;
 
-                        //if (total_days > 0)
-                        //{
-                        //    y = y - 1;
-                        //    string sql1 = $"UPDATE borrowed_books SET penalty = '{y}' WHERE student_id='{b}' AND returned_date = '{formattedDate}' ";
-                        //    MySqlCommand cmd = new MySqlCommand(sql1, cnn);
-                        //    cmd.ExecuteNonQuery();
-                        //}
-                        //else if (total_days < 0)
-                        //{
-                        //    string sql2 = $"SELECT due_date , penalty  FROM borrowed_books";
-                        //    MySqlCommand cmd2 = new MySqlCommand(sql2, cnn);
-                        //    try
-                        //    {
-                        //        MySqlDataReader reader2 = cmd2.ExecuteReader();
-                        //        if (reader2.HasRows)
-                        //        {
-                        //            while (reader2.Read())
-                        //            {
-                        //                a = reader2.GetDateTime(0);
-                        //                int z = reader2.GetInt32(1);
-                        //                difference2 = today_date - x;
+                        if (total_days > 0)
+                        {
+                            y = y - 1;
+                            string sql1 = $"UPDATE borrowed_books SET penalty = '{y}' WHERE student_id='{b}' ";
+                            MySqlCommand cmd = new MySqlCommand(sql1, cnn);
+                            cmd.ExecuteNonQuery();
+                            cnn.Close();
+                        }
+                        else if (total_days < 0)
+                        {
+                            string sql2 = $"SELECT due_date ,student_id , penalty  FROM borrowed_books";
+                            MySqlCommand cmd2 = new MySqlCommand(sql2, cnn);
+                            try
+                            {
+                                MySqlDataReader reader2 = cmd2.ExecuteReader();
+                                if (reader2.HasRows)
+                                {
+                                    while (reader2.Read())
+                                    {
+                                        a = reader2.GetDateTime(0);
+                                        int h = reader2.GetInt32(1);
+                                        int z = reader2.GetInt32(2);
+                                        difference2 = today_date - x;
 
-                        //                int total_days2 = (int)difference2.TotalDays;
+                                        int total_days2 = (int)difference2.TotalDays;
 
-                        //                if (total_days2 > 0)
-                        //                {
+                                        if (total_days2 > 0)
+                                        {
 
-                        //                    string sql3 = $"UPDATE borrowed_books SET penalty = '{total_days2}' WHERE due_date = '{a}' ";
-                        //                    MySqlCommand cmd3 = new MySqlCommand(sql3, cnn);
-                        //                    cmd3.ExecuteNonQuery();
+                                            string sql3 = $"UPDATE borrowed_books SET penalty = '{total_days2}' WHERE student_id = '{h}' ";
+                                            MySqlCommand cmd3 = new MySqlCommand(sql3, cnn);
+                                            cmd3.ExecuteNonQuery();
+                                            cnn.Close(); 
 
-                        //                }
-                        //                else
-                        //                {
-                        //                    return Ok();
-                        //                }
-                        //            }
-                        //        }
-                        //        reader2.Close();
-                        //    }
+                                        }
+                                        else
+                                        {
+                                            return Ok();
+                                        }
+                                    }
+                                }
+                                reader2.Close();
+                            }
 
-                        //    catch (Exception e)
-                        //    {
-                        //        Console.WriteLine("Error" + e.Message);
-                        //    }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine("Error" + e.Message);
+                            }
 
-                        //}
-                        //else
-                        //{
-                        //    var alert = new { message = "no changes to update the penalty" };
-                        //    return Ok(alert);
-                        //}
-                    }       
+                        }
+                        else
+                        {
+                            var alert = new { message = "no changes to update the penalty" };
+                            return Ok(alert);
+                        }
+                    }
                 }
                 reader.Close();
             }
@@ -114,13 +117,13 @@ namespace Graduation.Controllers
             }
 
             int total_days22 = (int)difference2.TotalDays;
-            y = y - 1;
-            string sql1 = $"UPDATE borrowed_books SET penalty = '{y}' WHERE student_id='{b}' AND returned_date = '{formattedDate}' ";
-            MySqlCommand cmd = new MySqlCommand(sql1, cnn);
-            cmd.ExecuteNonQuery();
-            cnn.Close();
+            //y = y - 1;
+            //string sql1 = $"UPDATE borrowed_books SET penalty = '{y}' WHERE student_id='{b}' ";
+            //MySqlCommand cmd = new MySqlCommand(sql1, cnn);
+            //cmd.ExecuteNonQuery();
+            //cnn.Close();
             var message = new { message = "all penalty are updated" };
-            return Ok(y);
+            return Ok(total_days);
          }
      }
 }
