@@ -19,7 +19,7 @@ namespace Graduation.Controllers
     {
 
         [HttpPost]
-        public IActionResult eventPenalty([FromBody] Borrowed_books borrowed_books)
+        public IActionResult eventPenalty()
         {
             DateTime today_date = DateTime.Now.Date;
             DateTime x = new DateTime();
