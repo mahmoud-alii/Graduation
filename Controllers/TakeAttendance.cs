@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using static Graduation.Controllers.CheckTakes;
 using MySql.Data.MySqlClient;
+using static Graduation.Controllers.GetlistOfBooks;
 
 namespace Graduation.Controllers
 {
@@ -14,9 +15,10 @@ namespace Graduation.Controllers
         {
             Boolean x = true;
             MySqlConnection cnn;
-            String trial = @"server=aast-db.cf4afzenuusl.us-east-1.rds.amazonaws.com;database=attendance;userid=ahmed_admin;password=777888999;";
+            String trial = @"server=127.0.0.1;database=attendance;userid=root;password=;";
+            //String trial = @"server=aast-db.cf4afzenuusl.us-east-1.rds.amazonaws.com;database=attendance;userid=ahmed_admin;password=777888999;";
             cnn = new MySqlConnection(trial);
-            string query = $"SELECT CASE WHEN EXISTS (SELECT * FROM attendance WHERE student_id= '{attendance.student_id}' AND schedule_id = '{attendance.schedule_id}' AND week_number = '{attendance.week_no}') THEN 'TRUE' ELSE 'FALSE' END ";
+            string query = $"SELECT CASE WHEN EXISTS (SELECT * FROM attendance1 WHERE student_id= '{attendance.student_id}' AND schedule_id = '{attendance.schedule_id}' AND week_number = '{attendance.week_no}') THEN 'TRUE' ELSE 'FALSE' END ";
             MySqlCommand command = new MySqlCommand(query, cnn);
             try
             {
@@ -37,8 +39,9 @@ namespace Graduation.Controllers
                 Console.WriteLine("Error" + e.Message);
             }
 
-            if (x == false) { 
-                string query2 = $"INSERT INTO attendance (student_id,schedule_id,week_number,attended) VALUES (@Value1, @Value2 , @Value3, @Value4 )";
+            if (x == false) {
+                string sql = $"INSERT INTO attendance1 (student_id, schedule_id, week_number, attended) VALUES ('{attendance.student_id}', '{attendance.schedule_id}', '{attendance.week_no}','{1}')";
+                string query2 = $"INSERT INTO attendance1 (student_id,schedule_id,week_number,attended) VALUES (@Value1, @Value2 , @Value3, @Value4 )";
                 MySqlCommand cmd = new MySqlCommand(query2, cnn);
                 cmd.Parameters.AddWithValue("@Value1", attendance.student_id);
                 cmd.Parameters.AddWithValue("@Value2", attendance.schedule_id);
