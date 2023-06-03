@@ -67,6 +67,9 @@ namespace Graduation.Controllers
                 string sql = $"UPDATE borrowed_books SET penalty = '{total_days}' , returned_date = '{formattedDate}' WHERE student_id='{borrowed_books.student_id}'AND book_id='{borrowed_books.book_id}'";
                 MySqlCommand cmd = new MySqlCommand(sql, cnn);
                 cmd.ExecuteNonQuery();
+                string sql2 = $"UPDATE books SET copies_available = copies_available+1  WHERE book_id='{borrowed_books.book_id}'";
+                MySqlCommand cmd2 = new MySqlCommand(sql2, cnn);
+                cmd2.ExecuteNonQuery();
                 cnn.Close();
                 var message = new { message = "The borrowed book has returned and there is penalty added" };
                 //string result = $"The difference between {x.ToShortDateString()} and {today_date.ToShortDateString()} is {difference.TotalDays} days.";
@@ -77,6 +80,9 @@ namespace Graduation.Controllers
                 string sql = $"UPDATE borrowed_books SET penalty = '{total_days}' , returned_date = '{formattedDate}' WHERE student_id='{borrowed_books.student_id}'AND book_id='{borrowed_books.book_id}'";
                 MySqlCommand cmd = new MySqlCommand(sql, cnn);
                 cmd.ExecuteNonQuery();
+                string sql2 = $"UPDATE books SET copies_available = copies_available+1  WHERE book_id='{borrowed_books.book_id}'";
+                MySqlCommand cmd2 = new MySqlCommand(sql2, cnn);
+                cmd2.ExecuteNonQuery();
                 cnn.Close();
                 var message = new { message = "The borrowed book has returned and there is no penalty" };
                 //string result = $"The difference between {x.ToShortDateString()} and {today_date.ToShortDateString()} is {difference.TotalDays} days.";
