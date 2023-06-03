@@ -21,7 +21,7 @@ namespace Graduation.Controllers
             public int student_id { get; set; }
             public DateTime borrowed_date { get; set; }
             public DateTime due_date { get; set; }
-            public DateTime returned_time { get; set; }
+            public DateTime returned_date { get; set; }
             public decimal penalty { get; set; }  
 
         }
