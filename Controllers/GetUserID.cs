@@ -8,7 +8,7 @@ namespace Graduation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class GetStudentID : ControllerBase
+    public class GetUserID : ControllerBase
     {
         [HttpPost]
         public IActionResult getStudentID([FromBody] Nfc_serial nfc_Serial )

@@ -28,11 +28,11 @@ namespace Graduation.Controllers
         [HttpPost]
         public IActionResult Authenticate([FromBody] Person person)
         {
-            int doctor = 5;
+            string account_type = "Not Authorized";
             MySqlConnection cnn;
-            String trial = @"server=aast-db.cf4afzenuusl.us-east-1.rds.amazonaws.com;database=attendance;userid=ahmed_admin;password=777888999;";
+            String trial = @"server=aast-db.cf4afzenuusl.us-east-1.rds.amazonaws.com;database=usersdb;userid=ahmed_admin;password=777888999;";
             cnn = new MySqlConnection(trial);
-            string query = $"SELECT is_doctor FROM users WHERE user_id='{person.user_id}' AND password='{person.password}'";
+            string query = $"SELECT user_type FROM users WHERE user_id='{person.user_id}' AND password='{person.password}'";
             MySqlCommand command = new MySqlCommand(query, cnn);
 
             try
@@ -44,7 +44,7 @@ namespace Graduation.Controllers
                 {
                     while (reader.Read())
                     {
-                        doctor =reader.GetInt32(0);
+                        account_type = reader.GetString(0);
                     }
                 }
                 reader.Close();
@@ -54,10 +54,9 @@ namespace Graduation.Controllers
             {
                 Console.WriteLine("Error" + e.Message);
             }
-            Console.WriteLine(doctor); //to check the output of invalid login
+            Console.WriteLine(account_type); //to check the output of invalid login
             cnn.Close();
-
-            return Ok(new { AccountType = doctor });
+            return Ok(new { AccountType = account_type });
         }
     }
 }
