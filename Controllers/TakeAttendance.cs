@@ -39,14 +39,15 @@ namespace Graduation.Controllers
                 Console.WriteLine("Error" + e.Message);
             }
 
+<<<<<<< HEAD
             if (x == false) {
                 string sql = $"INSERT INTO attendance1 (student_id, schedule_id, week_number, attended) VALUES ('{attendance.student_id}', '{attendance.schedule_id}', '{attendance.week_no}','{1}')";
                 string query2 = $"INSERT INTO attendance1 (student_id,schedule_id,week_number,attended) VALUES (@Value1, @Value2 , @Value3, @Value4 )";
+=======
+            if (x == false) { 
+                string query2 = $"INSERT INTO attendance (student_id,schedule_id,week_number,attended) VALUES ('{attendance.student_id}', '{attendance.schedule_id}' , '{attendance.week_no}', '{1}' )";
+>>>>>>> 8c86b999ad84c33041c9b0d485bbb427a9026234
                 MySqlCommand cmd = new MySqlCommand(query2, cnn);
-                cmd.Parameters.AddWithValue("@Value1", attendance.student_id);
-                cmd.Parameters.AddWithValue("@Value2", attendance.schedule_id);
-                cmd.Parameters.AddWithValue("@Value3", attendance.week_no);
-                cmd.Parameters.AddWithValue("@Value4", 1);
                 cmd.ExecuteNonQuery();
                 cnn.Close();
                 var message = new { message = "Attendance taken" };
