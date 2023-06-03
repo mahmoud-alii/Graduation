@@ -1,21 +1,21 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using static Graduation.Controllers.attendance;
+using static Graduation.Controllers.CheckTakes;
 using MySql.Data.MySqlClient;
 
 namespace Graduation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class GetClassNo : ControllerBase
+    public class GetScheduleID : ControllerBase
     {
         [HttpPost]
-        public IActionResult getClassNo([FromBody] Schedules schedules)
+        public IActionResult getScheduleID([FromBody] Schedules schedules)
         {
             String class_no = "";
             String schedule_id = "";
             MySqlConnection cnn;
-            String trial = @"server=smart-campus.cewocktbczjl.us-east-1.rds.amazonaws.com;database=AAST;userid=admin;password=smart-campusadmin;";
+            String trial = @"server=aast-db.cf4afzenuusl.us-east-1.rds.amazonaws.com;database=attendance;userid=ahmed_admin;password=777888999;";
             cnn = new MySqlConnection(trial);
             string query = $"SELECT class_no, schedule_id FROM schedules WHERE course_code='{schedules.course_code}' AND instructor_id='{schedules.instructor_id}' AND slots='{schedules.slots}'";
             MySqlCommand command = new MySqlCommand(query, cnn);
@@ -45,8 +45,7 @@ namespace Graduation.Controllers
 
             return Ok(new
             {
-                ClassNumber = class_no
-                ,
+                ClassNumber = class_no,
                 ScheduleId = schedule_id
             });
         }

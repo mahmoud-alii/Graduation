@@ -12,7 +12,6 @@ using MySqlX.XDevAPI.Common;
 using System.Web.Http.Results;
 using System;
 using static Graduation.Controllers.GetTheBookID;
-using static Graduation.Controllers.attendance;
 
 namespace Graduation.Controllers
 {
