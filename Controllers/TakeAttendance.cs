@@ -46,14 +46,14 @@ namespace Graduation.Controllers
                 cmd.Parameters.AddWithValue("@Value4", 1);
                 cmd.ExecuteNonQuery();
                 cnn.Close();
-                var message = new { message = "Attendance have been taken" };
+                var message = new { message = "Attendance taken" };
                 return Ok(message);
             }
             else
             {
                 //string query3 = $"SELECT attended FROM attendance WHERE student_id= '{attendance.student_id}' AND schedule_id = '{attendance.schedule_id}' AND week_no = '{attendance.week_no}'";
                 cnn.Close();
-                var message = new { message = "the student is not in this class" };
+                var message = new { message = "Already taken" };
                 return Ok(message);
             }
         }
