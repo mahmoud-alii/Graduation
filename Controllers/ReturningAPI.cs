@@ -18,20 +18,22 @@ namespace Graduation.Controllers
     [Route("api/[controller]")]
     [ApiController]
 
-    public class calculatePenalty : ControllerBase
+    public class ReturningAPI : ControllerBase
     {
 
         [HttpPost]
-        public IActionResult getlistOfBooks([FromBody] Borrowed_books borrowed_books)
+        public IActionResult returningAPI([FromBody] Borrowed_books borrowed_books)
         {
+            DateTime today_date = DateTime.Now.Date;
+            string formattedDate = today_date.ToString("yyyy-MM-dd");
             DateTime x = new DateTime();
             DateTime y = new DateTime();
             TimeSpan difference = new TimeSpan() ;
             MySqlConnection cnn;
-            //String trial = @"server=127.0.0.1;database=attendance;userid=root;password=;";
-            String trial = @"server=aast-db.cf4afzenuusl.us-east-1.rds.amazonaws.com;database=library;userid=ahmed_admin;password=777888999;";
+            String trial = @"server=127.0.0.1;database=attendance;userid=root;password=;";
+            //String trial = @"server=aast-db.cf4afzenuusl.us-east-1.rds.amazonaws.com;database=library;userid=ahmed_admin;password=777888999;";
             cnn = new MySqlConnection(trial);
-            string query = $"SELECT due_date , returned_date  FROM borrowed_books WHERE student_id='{borrowed_books.student_id}'AND book_id='{borrowed_books.book_id}' ";
+            string query = $"SELECT due_date  FROM borrowed_books WHERE student_id='{borrowed_books.student_id}'AND book_id='{borrowed_books.book_id}' ";
             MySqlCommand command = new MySqlCommand(query, cnn);
 
             try
@@ -46,8 +48,8 @@ namespace Graduation.Controllers
                     {
 
                          x = reader.GetDateTime(0);
-                         y = reader.GetDateTime(1); 
-                        difference = y - x ;
+
+                        difference = today_date - x ;
                     }
                 }
                 reader.Close();
@@ -62,19 +64,23 @@ namespace Graduation.Controllers
 
             if (total_days > 0)
             {
-                string sql = $"UPDATE borrowed_books SET penalty = '{total_days}' WHERE student_id='{borrowed_books.student_id}'AND book_id='{borrowed_books.book_id}'"; 
+                string sql = $"UPDATE borrowed_books SET penalty = '{total_days}' , returned_date = '{formattedDate}' WHERE student_id='{borrowed_books.student_id}'AND book_id='{borrowed_books.book_id}'";
                 MySqlCommand cmd = new MySqlCommand(sql, cnn);
                 cmd.ExecuteNonQuery();
                 cnn.Close();
-                var message = new { message = "penalty added" };
+                var message = new { message = "The borrowed book has returned and there is penalty added" };
+                //string result = $"The difference between {x.ToShortDateString()} and {today_date.ToShortDateString()} is {difference.TotalDays} days.";
                 return Ok(message);
             }
             else
             {
+                string sql = $"UPDATE borrowed_books SET penalty = '{total_days}' , returned_date = '{formattedDate}' WHERE student_id='{borrowed_books.student_id}'AND book_id='{borrowed_books.book_id}'";
+                MySqlCommand cmd = new MySqlCommand(sql, cnn);
+                cmd.ExecuteNonQuery();
                 cnn.Close();
-                var message = new { message = "No penalty for this Book" };
-                string result = $"The difference between {x.ToShortDateString()} and {y.ToShortDateString()} is {difference.TotalDays} days.";
-                return Ok(result);
+                var message = new { message = "The borrowed book has returned and there is no penalty" };
+                //string result = $"The difference between {x.ToShortDateString()} and {today_date.ToShortDateString()} is {difference.TotalDays} days.";
+                return Ok(message);
             }
             //string result = $"The difference between {x.ToShortDateString} and {y.ToShortDateString} is {difference.TotalDays} days.";
             //return Ok(result);
