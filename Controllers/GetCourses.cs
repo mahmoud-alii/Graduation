@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using static Graduation.Controllers.attendance;
+using static Graduation.Controllers.CheckTakes;
 using System.Collections;
 using MySql.Data.MySqlClient;
 
@@ -8,7 +8,7 @@ namespace Graduation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class GetCourses : ControllerBase
+    public class GetCoursesArray : ControllerBase
     {
         [HttpPost]
         public IActionResult getCourses([FromBody] Teaches teaches)
@@ -16,7 +16,7 @@ namespace Graduation.Controllers
             var courses = new ArrayList();
             int i = 0;
             MySqlConnection cnn;
-            String trial = @"server=smart-campus.cewocktbczjl.us-east-1.rds.amazonaws.com;database=AAST;userid=admin;password=smart-campusadmin;";
+            String trial = @"server=aast-db.cf4afzenuusl.us-east-1.rds.amazonaws.com;database=attendance;userid=ahmed_admin;password=777888999;";
             cnn = new MySqlConnection(trial);
             string query = $"SELECT course_code FROM teaches WHERE instructor_id='{teaches.instructor_id}'";
             MySqlCommand command = new MySqlCommand(query, cnn);

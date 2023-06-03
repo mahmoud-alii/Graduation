@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using static Graduation.Controllers.attendance;
+using static Graduation.Controllers.CheckTakes;
 using MySql.Data.MySqlClient;
 using System.Security.Cryptography.X509Certificates;
 using System.Drawing.Imaging;
