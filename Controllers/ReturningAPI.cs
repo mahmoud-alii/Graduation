@@ -27,7 +27,6 @@ namespace Graduation.Controllers
             DateTime today_date = DateTime.Now.Date;
             string formattedDate = today_date.ToString("yyyy-MM-dd");
             DateTime x = new DateTime();
-            DateTime y = new DateTime();
             TimeSpan difference = new TimeSpan() ;
             MySqlConnection cnn;
             String trial = @"server=127.0.0.1;database=attendance;userid=root;password=;";
@@ -77,7 +76,7 @@ namespace Graduation.Controllers
             }
             else
             {
-                string sql = $"UPDATE borrowed_books SET penalty = '{total_days}' , returned_date = '{formattedDate}' WHERE student_id='{borrowed_books.student_id}'AND book_id='{borrowed_books.book_id}'";
+                string sql = $"UPDATE borrowed_books SET returned_date = '{formattedDate}' WHERE student_id='{borrowed_books.student_id}'AND book_id='{borrowed_books.book_id}'";
                 MySqlCommand cmd = new MySqlCommand(sql, cnn);
                 cmd.ExecuteNonQuery();
                 string sql2 = $"UPDATE books SET copies_available = copies_available+1  WHERE book_id='{borrowed_books.book_id}'";
@@ -88,7 +87,7 @@ namespace Graduation.Controllers
                 //string result = $"The difference between {x.ToShortDateString()} and {today_date.ToShortDateString()} is {difference.TotalDays} days.";
                 return Ok(message);
             }
-            //string result = $"The difference between {x.ToShortDateString} and {y.ToShortDateString} is {difference.TotalDays} days.";
+            //string result = $"The difference between {x.ToShortDateString} and {today_date.ToShortDateString} is {difference.TotalDays} days.";
             //return Ok(result);
         }
     }
