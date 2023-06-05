@@ -65,6 +65,8 @@ namespace Graduation.Controllers
                             MySqlCommand cmd2 = new MySqlCommand(sql2, cnn);
                             try
                             {
+                                cnn.Close();
+                                cnn.Open();
                                 MySqlDataReader reader2 = cmd2.ExecuteReader();
                                 if (reader2.HasRows)
                                 {
@@ -88,6 +90,7 @@ namespace Graduation.Controllers
                                         }
                                         else
                                         {
+                                            cnn.Close();
                                             return Ok();
                                         }
                                     }
@@ -103,6 +106,7 @@ namespace Graduation.Controllers
                         }
                         else
                         {
+                            cnn.Close();
                             var alert = new { message = "no changes to update the penalty" };
                             return Ok(alert);
                         }
@@ -115,7 +119,7 @@ namespace Graduation.Controllers
             {
                 Console.WriteLine("Error" + e.Message);
             }
-
+            cnn.Close();
             int total_days22 = (int)difference2.TotalDays;
             //y = y - 1;
             //string sql1 = $"UPDATE borrowed_books SET penalty = '{y}' WHERE student_id='{b}' ";
