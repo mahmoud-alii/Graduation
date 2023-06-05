@@ -60,6 +60,7 @@ namespace Graduation.Controllers
                 MySqlCommand cmnd = new MySqlCommand(query3, cnn);
                 try
                 {
+                    cnn.Close() ;
                     cnn.Open();
                     MySqlDataReader reader = cmnd.ExecuteReader();
 
@@ -87,8 +88,8 @@ namespace Graduation.Controllers
                 {
                     message = "Already taken";
                 }
-                return Ok(new { message = message, a = a });
                 cnn.Close();
+                return Ok(new { message = message, a = a });
             }
         }
     }
