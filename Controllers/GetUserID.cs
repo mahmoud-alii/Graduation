@@ -11,13 +11,13 @@ namespace Graduation.Controllers
     public class GetUserID : ControllerBase
     {
         [HttpPost]
-        public IActionResult getUserID([FromBody] Nfc_serial nfc_Serial )
+        public IActionResult getUserID([FromBody] Has has )
         {
-            int user_id = 0;
+            int student_id = 0;
             MySqlConnection cnn;
             String trial = @"server=aast-db.cf4afzenuusl.us-east-1.rds.amazonaws.com;database=attendance;userid=ahmed_admin;password=777888999;";
             cnn = new MySqlConnection(trial);
-            string query = $"SELECT user_id FROM nfc_serial WHERE serial_no='{nfc_Serial.serial_no}'";
+            string query = $"SELECT student_id FROM has WHERE serial_no='{has.serial_no}'";
             MySqlCommand command = new MySqlCommand(query, cnn);
             try
             {
@@ -28,7 +28,7 @@ namespace Graduation.Controllers
                 {
                     while (reader.Read())
                     {
-                        user_id = reader.GetInt32(0);
+                        student_id = reader.GetInt32(0);
                     }
                 }
                 reader.Close();
@@ -43,7 +43,7 @@ namespace Graduation.Controllers
 
             return Ok(new
             {
-                UserID = user_id
+                StudentID = student_id
             });
         }
     }

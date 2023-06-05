@@ -39,7 +39,13 @@ namespace Graduation.Controllers
             public string class_no { get; set; }
 
         }
-        public class Attendance
+
+        public class Has
+        {
+            public int student_id { get; set; }
+            public int serial_no { get; set; }
+        }
+            public class Attendance
         {
             public int attendance_id { get; set; }
             public int student_id { get; set; }
