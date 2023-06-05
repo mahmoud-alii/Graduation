@@ -53,19 +53,20 @@ namespace Graduation.Controllers
 
                         if (total_days > 0)
                         {
+                            cnn.Close();
+                            cnn.Open();
                             y = y - 1;
                             string sql1 = $"UPDATE borrowed_books SET penalty = '{y}' WHERE student_id='{b}' ";
                             MySqlCommand cmd = new MySqlCommand(sql1, cnn);
                             cmd.ExecuteNonQuery();
-                            cnn.Close();
                         }
                         else if (total_days < 0)
                         {
+                            cnn.Close();
                             string sql2 = $"SELECT due_date ,student_id , penalty  FROM borrowed_books";
                             MySqlCommand cmd2 = new MySqlCommand(sql2, cnn);
                             try
                             {
-                                cnn.Close();
                                 cnn.Open();
                                 MySqlDataReader reader2 = cmd2.ExecuteReader();
                                 if (reader2.HasRows)
@@ -81,11 +82,11 @@ namespace Graduation.Controllers
 
                                         if (total_days2 > 0)
                                         {
-
+                                            cnn.Close();
+                                            cnn.Open();
                                             string sql3 = $"UPDATE borrowed_books SET penalty = '{total_days2}' WHERE student_id = '{h}' ";
                                             MySqlCommand cmd3 = new MySqlCommand(sql3, cnn);
                                             cmd3.ExecuteNonQuery();
-                                            cnn.Close(); 
 
                                         }
                                         else
