@@ -11,7 +11,7 @@ namespace Graduation.Controllers
         {
             public int user_id { get; set; }
             public string password { get; set; }
-            public int is_doctor { get; set; }
+            public int user_type { get; set; }
         }
 
         public class Instructor : Person
