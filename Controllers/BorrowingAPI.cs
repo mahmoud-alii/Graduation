@@ -95,7 +95,7 @@ namespace Graduation.Controllers
                     {
                         DateTime returnedDate = reader3.GetDateTime(0);
                         string x = returnedDate.ToString("yyyy-MM-dd");
-                        if  (x== null || x == "0000-00-00")
+                        if  (x== null || x == "0001-01-01")
                         { 
                         num_books += 1;
                         }                                    
