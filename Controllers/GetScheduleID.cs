@@ -17,7 +17,7 @@ namespace Graduation.Controllers
             MySqlConnection cnn;
             String trial = @"server=aast-db.cf4afzenuusl.us-east-1.rds.amazonaws.com;database=attendance;userid=ahmed_admin;password=777888999;";
             cnn = new MySqlConnection(trial);
-            string query = $"SELECT class_no, schedule_id FROM schedules WHERE course_code='{schedules.course_code}' AND instructor_id='{schedules.instructor_id}' AND slots='{schedules.slots}'";
+            string query = $"SELECT class_no, schedule_id FROM schedules WHERE course_code='{schedules.course_code}' AND instructor_id='{schedules.instructor_id}' AND day='{schedules.day}' AND slots='{schedules.slots}'";
             MySqlCommand command = new MySqlCommand(query, cnn);
 
             try
