@@ -13,12 +13,15 @@ namespace Graduation.Controllers
         [HttpPost]
         public IActionResult getCourses([FromBody] Teaches teaches)
         {
-            var courses = new ArrayList();
+            ArrayList courseList = new ArrayList();
             int i = 0;
             MySqlConnection cnn;
             String trial = @"server=aast-db.cf4afzenuusl.us-east-1.rds.amazonaws.com;database=attendance;userid=ahmed_admin;password=777888999;";
             cnn = new MySqlConnection(trial);
-            string query = $"SELECT DISTINCT course_code FROM teaches WHERE instructor_id='{teaches.instructor_id}'";
+            //string query = $"SELECT DISTINCT course_code FROM teaches WHERE instructor_id='{teaches.instructor_id}'";
+            string query = $"SELECT c.course_code, c.course_name FROM courses c JOIN teaches t ON c.course_code = t.course_code WHERE t.instructor_id = '{teaches.instructor_id}' GROUP BY c.course_code, c.course_name";
+            
+
             MySqlCommand command = new MySqlCommand(query, cnn);
 
             try
@@ -30,7 +33,12 @@ namespace Graduation.Controllers
                 {
                     while (reader.Read())
                     {
-                        courses.Add(reader.GetString(0));
+                        ArrayList course = new ArrayList
+                        {
+                            reader.GetString(0),
+                            reader.GetString(1)
+                        };
+                        courseList.Add(course);
                         i++;
                     }
                 }
@@ -46,7 +54,7 @@ namespace Graduation.Controllers
 
             return Ok(new
             {
-                Courses = courses.ToArray(),
+                Courses = courseList.ToArray(),
                 NumberOfCourses = i
             });
         }
