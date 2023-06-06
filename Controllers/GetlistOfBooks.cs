@@ -44,17 +44,34 @@ namespace Graduation.Controllers
                 {
                     while (reader.Read())
                     {
-                        ArrayList list = new ArrayList
+                        try
                         {
-                            reader.GetInt32(0),
-                            reader.GetInt32(1),
-                            reader.GetInt32(2),
-                            reader.GetDateTime(3),
-                            reader.GetDateTime(4),
-                            reader.GetDateTime(5),
-                            reader.GetDecimal(6)
-                        };
-                        borrowedlist.Add(list);
+                            ArrayList list = new ArrayList
+                            {
+                                reader.GetInt32(0),
+                                reader.GetInt32(1),
+                                reader.GetInt32(2),
+                                reader.GetDateTime(3),
+                                reader.GetDateTime(4),
+                                reader.GetDateTime(5),
+                                reader.GetDecimal(6)
+                            };
+                            borrowedlist.Add(list);
+                        }
+                        catch (Exception ex) {
+                            ArrayList list = new ArrayList
+                            {
+                                reader.GetInt32(0),
+                                reader.GetInt32(1),
+                                reader.GetInt32(2),
+                                reader.GetDateTime(3),
+                                reader.GetDateTime(4),
+                                reader.GetString(5),
+                                reader.GetDecimal(6)
+                            };
+                            borrowedlist.Add(list);
+                        }
+                        
                     }
                 }
                 reader.Close();
