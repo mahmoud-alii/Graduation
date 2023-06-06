@@ -18,7 +18,7 @@ namespace Graduation.Controllers
             MySqlConnection cnn;
             String trial = @"server=aast-db.cf4afzenuusl.us-east-1.rds.amazonaws.com;database=attendance;userid=ahmed_admin;password=777888999;";
             cnn = new MySqlConnection(trial);
-            string query = $"SELECT course_code FROM teaches WHERE instructor_id='{teaches.instructor_id}'";
+            string query = $"SELECT DISTINCT course_code FROM teaches WHERE instructor_id='{teaches.instructor_id}'";
             MySqlCommand command = new MySqlCommand(query, cnn);
 
             try
