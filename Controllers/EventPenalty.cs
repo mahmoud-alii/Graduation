@@ -31,8 +31,8 @@ namespace Graduation.Controllers
             int b = 0 ;  
             int total_days = 0;
             MySqlConnection cnn;
-            String trial = @"server=127.0.0.1;database=attendance;userid=root;password=;";
-            //String trial = @"server=aast-db.cf4afzenuusl.us-east-1.rds.amazonaws.com;database=library;userid=ahmed_admin;password=777888999;";
+            //String trial = @"server=127.0.0.1;database=attendance;userid=root;password=;";
+            String trial = @"server=aast-db.cf4afzenuusl.us-east-1.rds.amazonaws.com;database=library;userid=ahmed_admin;password=777888999;";
             cnn = new MySqlConnection(trial);
             string query = $"SELECT returned_date , student_id , penalty  FROM borrowed_books";
             MySqlCommand command = new MySqlCommand(query, cnn);
