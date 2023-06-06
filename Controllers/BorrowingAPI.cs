@@ -12,6 +12,7 @@ using MySqlX.XDevAPI.Common;
 using System.Web.Http.Results;
 using System;
 using static Graduation.Controllers.GetTheBookID;
+using Microsoft.VisualBasic;
 
 namespace Graduation.Controllers
 {
@@ -39,7 +40,7 @@ namespace Graduation.Controllers
             string query2 = $"SELECT penalty FROM borrowed_books WHERE student_id='{borrowed_books.student_id}'";
             MySqlCommand command2 = new MySqlCommand(query2, cnn);
 
-            string query3 = $"SELECT book_id FROM borrowed_books WHERE student_id='{borrowed_books.student_id}'";
+            string query3 = $"SELECT returned_date FROM borrowed_books WHERE student_id='{borrowed_books.student_id}'";
             MySqlCommand command3 = new MySqlCommand(query3, cnn);
 
             try
@@ -60,8 +61,10 @@ namespace Graduation.Controllers
             {
                 Console.WriteLine("Error" + e.Message);
             }
+            cnn.Close();
             try
             {
+                cnn.Open();
                 MySqlDataReader reader2 = command2.ExecuteReader();
 
 
@@ -79,8 +82,10 @@ namespace Graduation.Controllers
             {
                 Console.WriteLine("Error" + e.Message);
             }
+            cnn.Close();
             try
             {
+                cnn.Open();
                 MySqlDataReader reader3 = command3.ExecuteReader();
 
 
@@ -88,8 +93,12 @@ namespace Graduation.Controllers
                 {
                     while (reader3.Read())
                     {
-                        int x = reader3.GetInt32(0);
-                        num_books += 1 ;
+                        DateTime returnedDate = reader3.GetDateTime(0);
+                        string x = returnedDate.ToString("yyyy-MM-dd");
+                        if  (x== null || x == "0000-00-00")
+                        { 
+                        num_books += 1;
+                        }                                    
                     }
                 }
                 reader3.Close();
@@ -98,15 +107,17 @@ namespace Graduation.Controllers
             {
                 Console.WriteLine("Error" + e.Message);
             }
-
+            cnn.Close();
 
             if (total_penalty == 0 && num_books < 3)
             {
                 if (num_cp > 1)
                 {
+                    cnn.Open();
                     DateTime dueDate = today_date.AddDays(7);
                     string formattedDate2 = dueDate.ToString("yyyy-MM-dd");
-                    string Zero = "0000 - 00 - 00";
+                    DateTime x = new DateTime (0000-00-00);
+                    string Zero = x.ToString("yyyy-MM-dd");
                     string sql = $"INSERT INTO borrowed_books (book_id, student_id, borrowed_date, due_date , returned_date) VALUES ('{borrowed_books.book_id}', '{borrowed_books.student_id}', '{formattedDate}','{formattedDate2}' , '{Zero}' )";
                     MySqlCommand cmd = new MySqlCommand(sql, cnn);
                     cmd.ExecuteNonQuery();
@@ -119,9 +130,11 @@ namespace Graduation.Controllers
                 }
                 else if (num_cp == 1)
                 {
+                    cnn.Open();
                     DateTime dueDate = today_date.AddDays(2);
                     string formattedDate2 = dueDate.ToString("yyyy-MM-dd");
-                    string Zero = "0000 - 00 - 00";
+                    DateTime x = new DateTime(0000 - 00 - 00);
+                    string Zero = x.ToString("yyyy-MM-dd");
                     string sql = $"INSERT INTO borrowed_books (book_id, student_id, borrowed_date, due_date , returned_date) VALUES ('{borrowed_books.book_id}', '{borrowed_books.student_id}', '{formattedDate}','{formattedDate2}' , '{Zero}' )";
                     MySqlCommand cmd = new MySqlCommand(sql, cnn);
                     cmd.ExecuteNonQuery();
