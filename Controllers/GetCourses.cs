@@ -8,7 +8,7 @@ namespace Graduation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class GetCoursesArray : ControllerBase
+    public class GetCourses : ControllerBase
     {
         [HttpPost]
         public IActionResult getCourses([FromBody] Teaches teaches)
