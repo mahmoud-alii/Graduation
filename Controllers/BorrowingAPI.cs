@@ -106,7 +106,8 @@ namespace Graduation.Controllers
                 {
                     DateTime dueDate = today_date.AddDays(7);
                     string formattedDate2 = dueDate.ToString("yyyy-MM-dd");
-                    string sql = $"INSERT INTO borrowed_books (book_id, student_id, borrowed_date, due_date) VALUES ('{borrowed_books.book_id}', '{borrowed_books.student_id}', '{formattedDate}','{formattedDate2}')";
+                    string Zero = "0000 - 00 - 00";
+                    string sql = $"INSERT INTO borrowed_books (book_id, student_id, borrowed_date, due_date , returned_date) VALUES ('{borrowed_books.book_id}', '{borrowed_books.student_id}', '{formattedDate}','{formattedDate2}' , '{Zero}' )";
                     MySqlCommand cmd = new MySqlCommand(sql, cnn);
                     cmd.ExecuteNonQuery();
                     string sql2 = $"UPDATE books SET copies_available = copies_available-1  WHERE book_id='{borrowed_books.book_id}'";
@@ -120,7 +121,8 @@ namespace Graduation.Controllers
                 {
                     DateTime dueDate = today_date.AddDays(2);
                     string formattedDate2 = dueDate.ToString("yyyy-MM-dd");
-                    string sql = $"INSERT INTO borrowed_books (book_id, student_id, borrowed_date, due_date) VALUES ('{borrowed_books.book_id}', '{borrowed_books.student_id}', '{formattedDate}','{formattedDate2}')";
+                    string Zero = "0000 - 00 - 00";
+                    string sql = $"INSERT INTO borrowed_books (book_id, student_id, borrowed_date, due_date , returned_date) VALUES ('{borrowed_books.book_id}', '{borrowed_books.student_id}', '{formattedDate}','{formattedDate2}' , '{Zero}' )";
                     MySqlCommand cmd = new MySqlCommand(sql, cnn);
                     cmd.ExecuteNonQuery();
                     string sql2 = $"UPDATE books SET copies_available = copies_available-1  WHERE book_id='{borrowed_books.book_id}'";
