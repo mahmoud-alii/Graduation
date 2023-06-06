@@ -84,7 +84,7 @@ namespace Graduation.Controllers
             }
 
             if (x == true) { msg = "Exists"; }
-            else { msg = "This student is not enrolled in this course."; }
+            else { msg = "Not Registered"; }
 
             return Ok(new
             {
