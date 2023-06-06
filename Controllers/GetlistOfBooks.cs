@@ -69,7 +69,7 @@ namespace Graduation.Controllers
 
             return Ok(new
             {
-                Borrowed list = borrowedlist.ToArray()
+                BorrowedList = borrowedlist.ToArray()
             });
         }
     }
