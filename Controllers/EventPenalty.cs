@@ -33,8 +33,8 @@ namespace Graduation.Controllers
             int z = 0 ;
             int total_days = 0;
             MySqlConnection cnn;
-            String trial = @"server=127.0.0.1;database=attendance;userid=root;password=;";
-            //String trial = @"server=aast-db.cf4afzenuusl.us-east-1.rds.amazonaws.com;database=library;userid=ahmed_admin;password=777888999;";
+            //String trial = @"server=127.0.0.1;database=attendance;userid=root;password=;";
+            String trial = @"server=aast-db.cf4afzenuusl.us-east-1.rds.amazonaws.com;database=library;userid=ahmed_admin;password=777888999;";
             cnn = new MySqlConnection(trial);
             string query = $"SELECT returned_date , student_id  , penalty , book_id  FROM borrowed_books";
             MySqlCommand command = new MySqlCommand(query, cnn);
@@ -62,8 +62,6 @@ namespace Graduation.Controllers
                                 y = y - 1;
                             if (y != 0)
                             {
-
-
                                 string sql1 = $"UPDATE borrowed_books SET penalty = '{y}' WHERE student_id='{b}' AND book_id = '{z}' ";
                                 MySqlCommand cmd = new MySqlCommand(sql1, cnn);
                                 cmd.ExecuteNonQuery();
@@ -133,7 +131,7 @@ namespace Graduation.Controllers
             //cmd.ExecuteNonQuery();
             //cnn.Close();
             var message = new { message = "all penalty are updated" };
-            return Ok(total_days);
+            return Ok(message);
          }
      }
 }
