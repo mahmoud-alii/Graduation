@@ -89,7 +89,7 @@ namespace Graduation.Controllers
                     message = "Already taken";
                 }
                 cnn.Close();
-                return Ok(new { message = message, a = a });
+                return Ok(new { Message = message});
             }
         }
     }
