@@ -17,6 +17,7 @@ namespace Graduation.Controllers
         }
         public class Transactions
         {
+            public int transaction_id { get; set; }
             public int student_id { get; set; }
             public int merchant_id { get; set; }      
             public DateTime transaction_date { get; set; }
@@ -31,7 +32,7 @@ namespace Graduation.Controllers
             MySqlConnection cnn;
             String trial = @"server=aast-db.cf4afzenuusl.us-east-1.rds.amazonaws.com;database=payment;userid=ahmed_admin;password=777888999;";
             cnn = new MySqlConnection(trial);
-            string query = $"SELECT points_balance FROM has WHERE student_id='{points.student_id}'";
+            string query = $"SELECT points_balance FROM points WHERE student_id='{points.student_id}'";
             MySqlCommand command = new MySqlCommand(query, cnn);
             try
             {

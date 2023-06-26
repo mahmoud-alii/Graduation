@@ -22,7 +22,7 @@ namespace Graduation.Controllers
             MySqlConnection cnn;
             String trial = @"server=aast-db.cf4afzenuusl.us-east-1.rds.amazonaws.com;database=payment;userid=ahmed_admin;password=777888999;";
             cnn = new MySqlConnection(trial);
-            string query = $"SELECT * FROM transactions WHERE student_id='{transactions.student_id}'";
+            string query = $"SELECT * FROM Transactions WHERE student_id='{transactions.student_id}'";
             MySqlCommand command = new MySqlCommand(query, cnn);
             try
             {
@@ -38,8 +38,9 @@ namespace Graduation.Controllers
                         {
                             reader.GetInt32(0),
                             reader.GetInt32(1),
-                            reader.GetDateTime(2),
-                            reader.GetDecimal(3),
+                            reader.GetInt32(2),
+                            reader.GetDateTime(3),
+                            reader.GetDecimal(4),
                         };
                         transactions_records.Add(list);
 
@@ -57,7 +58,7 @@ namespace Graduation.Controllers
 
             return Ok(new
             {
-                Transactions_Records = transactions_records.ToArray()
+                TransactionsRecords = transactions_records.ToArray()
             });
         }
     }

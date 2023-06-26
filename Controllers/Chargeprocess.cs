@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
 using static Graduation.Controllers.GetPointsAmount;
 using System.Security.Cryptography.X509Certificates;
-using static Graduation.Controllers.GetlistOfBooks;
 
 namespace Graduation.Controllers
 {

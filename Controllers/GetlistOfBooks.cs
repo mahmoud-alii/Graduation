@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using static Graduation.Controllers.CheckTakes;
 using MySql.Data.MySqlClient;
 using System.Security.Cryptography.X509Certificates;
 using System.Drawing.Imaging;
@@ -53,8 +52,8 @@ namespace Graduation.Controllers
                             reader.GetInt32(2),
                             reader.GetDateTime(3),
                             reader.GetDateTime(4),
-                            //reader.GetDateTime(5),
-                            reader.GetDecimal(6)
+                            reader.GetDateTime(5),
+                            //reader.GetDecimal(6)
                         };
                         borrowedlist.Add(list);
 
