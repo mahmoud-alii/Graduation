@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using static Graduation.Controllers.CheckTakes;
 using MySql.Data.MySqlClient;
 using System.Security.Cryptography.X509Certificates;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Graduation.Controllers
 {

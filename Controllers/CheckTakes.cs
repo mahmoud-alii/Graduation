@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
 using System.Collections;
@@ -54,6 +55,7 @@ namespace Graduation.Controllers
             public int attended { get; set; }
         }
         [HttpPost]
+        [Authorize]
         public IActionResult checkTakes([FromBody] Takes takes)
         {
             Boolean x = false;

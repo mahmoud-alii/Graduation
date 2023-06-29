@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using static Graduation.Controllers.CheckTakes;
 using System.Collections;
 using MySql.Data.MySqlClient;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Graduation.Controllers
 {
@@ -11,6 +12,7 @@ namespace Graduation.Controllers
     public class GetCourses : ControllerBase
     {
         [HttpPost]
+        [Authorize]
         public IActionResult getCourses([FromBody] Teaches teaches)
         {
             ArrayList courseList = new ArrayList();
@@ -21,7 +23,6 @@ namespace Graduation.Controllers
             //string query = $"SELECT DISTINCT course_code FROM teaches WHERE instructor_id='{teaches.instructor_id}'";
             string query = $"SELECT c.course_code, c.course_name FROM courses c JOIN teaches t ON c.course_code = t.course_code WHERE t.instructor_id = '{teaches.instructor_id}' GROUP BY c.course_code, c.course_name";
             
-
             MySqlCommand command = new MySqlCommand(query, cnn);
 
             try
