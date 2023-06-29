@@ -5,6 +5,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Drawing.Imaging;
 using System.Collections;
 using System.Security.Policy;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Graduation.Controllers
 {
@@ -27,6 +28,7 @@ namespace Graduation.Controllers
         }
         
         [HttpPost]
+        [Authorize]
         public IActionResult getlistOfBooks([FromBody] Borrowed_books borrowed_books)
         {
             ArrayList borrowedlist = new ArrayList();

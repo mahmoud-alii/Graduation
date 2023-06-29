@@ -11,6 +11,7 @@ using MySqlX.XDevAPI.Common;
 using System.Web.Http.Results;
 using System;
 using Microsoft.VisualBasic;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Graduation.Controllers
 {
@@ -20,6 +21,7 @@ namespace Graduation.Controllers
     {
 
         [HttpPost]
+        [Authorize]
         public IActionResult eventPenalty()
         {
             DateTime today_date = DateTime.Now.Date;

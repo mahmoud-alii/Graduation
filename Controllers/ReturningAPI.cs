@@ -11,7 +11,7 @@ using OfficeOpenXml.FormulaParsing.Excel.Functions.DateTime;
 using MySqlX.XDevAPI.Common;
 using System.Web.Http.Results;
 using System;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace Graduation.Controllers
 {
@@ -22,6 +22,7 @@ namespace Graduation.Controllers
     {
 
         [HttpPost]
+        [Authorize]
         public IActionResult returningAPI([FromBody] Borrowed_books borrowed_books)
         {
             DateTime today_date = DateTime.Now.Date;

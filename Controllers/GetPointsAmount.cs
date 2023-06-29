@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
 using System.Security.Cryptography.X509Certificates;
@@ -26,6 +27,7 @@ namespace Graduation.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult getPointsAmount([FromBody] Points points)
         {
             int points_amount = 0;

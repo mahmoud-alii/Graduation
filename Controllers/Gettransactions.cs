@@ -6,6 +6,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Drawing.Imaging;
 using System.Collections;
 using System.Security.Policy;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Graduation.Controllers
 {
@@ -16,6 +17,7 @@ namespace Graduation.Controllers
     {
 
         [HttpPost]
+        [Authorize]
         public IActionResult gettransactions([FromBody] Transactions transactions )
         {
             ArrayList transactions_records = new ArrayList();

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
 using static Graduation.Controllers.GetPointsAmount;
 using System.Security.Cryptography.X509Certificates;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Graduation.Controllers
 {
@@ -12,6 +13,7 @@ namespace Graduation.Controllers
     {
 
         [HttpPost]
+        [Authorize]
         public IActionResult chargeprocess([FromBody] Transactions transactions)
         {
             DateTime today_date = DateTime.Now;

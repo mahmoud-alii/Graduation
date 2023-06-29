@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
 using System.Security.Cryptography.X509Certificates;
@@ -21,6 +22,7 @@ namespace Graduation.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult getTheBookID([FromBody] Books books)
         {
             int book_id = 0;

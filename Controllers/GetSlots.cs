@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using static Graduation.Controllers.CheckTakes;
 using System.Collections;
 using MySql.Data.MySqlClient;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Graduation.Controllers
 {
@@ -11,6 +12,7 @@ namespace Graduation.Controllers
     public class GetSlots : ControllerBase
     {
         [HttpPost]
+        [Authorize]
         public IActionResult getSlots([FromBody] Schedules schedules)
         {
             ArrayList slotsList = new ArrayList();

@@ -14,6 +14,7 @@ using System;
 using static Graduation.Controllers.GetTheBookID;
 using Microsoft.VisualBasic;
 using System.Runtime.ConstrainedExecution;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Graduation.Controllers
 {
@@ -24,6 +25,7 @@ namespace Graduation.Controllers
     {
 
         [HttpPost]
+        [Authorize]
         public IActionResult borrowingAPI([FromBody] Borrowed_books borrowed_books )
         {
             DateTime today_date = DateTime.Now.Date;

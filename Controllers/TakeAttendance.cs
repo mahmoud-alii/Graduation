@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using static Graduation.Controllers.CheckTakes;
 using MySql.Data.MySqlClient;
 using static Graduation.Controllers.GetlistOfBooks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Graduation.Controllers
 {
@@ -11,6 +12,7 @@ namespace Graduation.Controllers
     public class TakeAttendance : ControllerBase
     {
         [HttpPost]
+        [Authorize]
         public IActionResult takeAttendance([FromBody] Attendance attendance)
         {
             Boolean x = true;

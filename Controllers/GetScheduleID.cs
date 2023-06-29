@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using static Graduation.Controllers.CheckTakes;
 using MySql.Data.MySqlClient;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Graduation.Controllers
 {
@@ -10,6 +11,7 @@ namespace Graduation.Controllers
     public class GetScheduleID : ControllerBase
     {
         [HttpPost]
+        [Authorize]
         public IActionResult getScheduleID([FromBody] Schedules schedules)
         {
             String class_no = "";

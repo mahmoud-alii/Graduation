@@ -16,7 +16,7 @@ namespace Graduation.Controllers
     [Route("[controller]")]
     public class Login : ControllerBase
     {
-        private readonly int _jwtExpirationMinutes = 60;
+        private readonly int _jwtExpirationMinutes = 1440;
 
         private readonly IConfiguration _configuration;
 
