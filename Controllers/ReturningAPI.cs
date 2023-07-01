@@ -22,7 +22,7 @@ namespace Graduation.Controllers
     {
 
         [HttpPost]
-        [Authorize]
+        //[Authorize]
         public IActionResult returningAPI([FromBody] Borrowed_books borrowed_books)
         {
             DateTime today_date = DateTime.Now.Date;

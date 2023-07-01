@@ -28,7 +28,7 @@ namespace Graduation.Controllers
         }
         
         [HttpPost]
-        [Authorize]
+        //[Authorize]
         public IActionResult getlistOfBooks([FromBody] Borrowed_books borrowed_books)
         {
             ArrayList borrowedlist = new ArrayList();
@@ -55,9 +55,14 @@ namespace Graduation.Controllers
                             reader.GetDateTime(3),
                             reader.GetDateTime(4),
                             reader.GetDateTime(5),
-                            //reader.GetDecimal(6)
+                            reader.GetDecimal(6)
                         };
-                        borrowedlist.Add(list);
+                        DateTime x = reader.GetDateTime(5);
+                        DateTime y = new DateTime(1970, 1, 1);
+                        if ( x == y )
+                        {
+                            borrowedlist.Add(list);
+                        }
 
                     }
                 }

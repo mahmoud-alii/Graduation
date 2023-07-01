@@ -25,7 +25,7 @@ namespace Graduation.Controllers
     {
 
         [HttpPost]
-        [Authorize]
+        //[Authorize]
         public IActionResult borrowingAPI([FromBody] Borrowed_books borrowed_books )
         {
             DateTime today_date = DateTime.Now.Date;
@@ -98,7 +98,8 @@ namespace Graduation.Controllers
                     {
                         DateTime returnedDate = reader3.GetDateTime(0);
                         string x = returnedDate.ToString("yyyy-MM-dd");
-                        if  (x == "1970-01-01")
+                        DateTime y = new DateTime(1970,1,1);
+                        if  (returnedDate == y)
                         { 
                         num_books += 1;
                         }                                    
@@ -121,7 +122,7 @@ namespace Graduation.Controllers
                     string formattedDate2 = dueDate.ToString("yyyy-MM-dd");
                     DateTime x = new DateTime (1970, 1, 1, 0, 0, 0);
                     string Zero = x.ToString("yyyy-MM-dd");
-                    string sql = $"INSERT INTO borrowed_books (book_id, student_id, borrowed_date, due_date , returned_date) VALUES ('{borrowed_books.book_id}', '{borrowed_books.student_id}', '{formattedDate}','{formattedDate2}' , '{Zero}' )";
+                    string sql = $"INSERT INTO borrowed_books (book_id, student_id, borrowed_date, due_date , returned_date , penalty) VALUES ('{borrowed_books.book_id}', '{borrowed_books.student_id}', '{formattedDate}','{formattedDate2}' , '{Zero}' , 0 )";
                     MySqlCommand cmd = new MySqlCommand(sql, cnn);
                     cmd.ExecuteNonQuery();
                     string sql2 = $"UPDATE books SET copies_available = copies_available-1  WHERE book_id='{borrowed_books.book_id}'";
@@ -138,7 +139,7 @@ namespace Graduation.Controllers
                     string formattedDate2 = dueDate.ToString("yyyy-MM-dd");
                     DateTime x = new DateTime(1970, 1, 1, 0, 0, 0);
                     string Zero = x.ToString("yyyy-MM-dd");
-                    string sql = $"INSERT INTO borrowed_books (book_id, student_id, borrowed_date, due_date , returned_date  ) VALUES ('{borrowed_books.book_id}', '{borrowed_books.student_id}', '{formattedDate}','{formattedDate2}' , ''{Zero} )";
+                    string sql = $"INSERT INTO borrowed_books (book_id, student_id, borrowed_date, due_date , returned_date , penalty ) VALUES ('{borrowed_books.book_id}', '{borrowed_books.student_id}', '{formattedDate}','{formattedDate2}' , '{Zero}' , 0 )";
                     MySqlCommand cmd = new MySqlCommand(sql, cnn);
                     cmd.ExecuteNonQuery();
                     string sql2 = $"UPDATE books SET copies_available = copies_available-1  WHERE book_id='{borrowed_books.book_id}'";
