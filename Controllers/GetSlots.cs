@@ -12,7 +12,7 @@ namespace Graduation.Controllers
     public class GetSlots : ControllerBase
     {
         [HttpPost]
-        [Authorize]
+        //[Authorize]
         public IActionResult getSlots([FromBody] Schedules schedules)
         {
             ArrayList slotsList = new ArrayList();

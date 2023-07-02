@@ -28,7 +28,7 @@ namespace Graduation.Controllers
         }
         
         [HttpPost]
-        [Authorize]
+        //[Authorize]
         public IActionResult getlistOfBooks([FromBody] Borrowed_books borrowed_books)
         {
             ArrayList borrowedlist = new ArrayList();

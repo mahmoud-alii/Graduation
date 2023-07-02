@@ -21,7 +21,7 @@ namespace Graduation.Controllers
     {
 
         [HttpPost]
-        [Authorize]
+        //[Authorize]
         public IActionResult eventPenalty()
         {
             DateTime today_date = DateTime.Now.Date;

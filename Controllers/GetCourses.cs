@@ -12,7 +12,7 @@ namespace Graduation.Controllers
     public class GetCourses : ControllerBase
     {
         [HttpPost]
-        [Authorize]
+        //[Authorize]
         public IActionResult getCourses([FromBody] Teaches teaches)
         {
             ArrayList courseList = new ArrayList();

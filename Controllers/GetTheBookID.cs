@@ -22,7 +22,7 @@ namespace Graduation.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+        //[Authorize]
         public IActionResult getTheBookID([FromBody] Books books)
         {
             int book_id = 0;

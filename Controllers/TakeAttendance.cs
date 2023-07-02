@@ -12,7 +12,7 @@ namespace Graduation.Controllers
     public class TakeAttendance : ControllerBase
     {
         [HttpPost]
-        [Authorize]
+        //[Authorize]
         public IActionResult takeAttendance([FromBody] Attendance attendance)
         {
             Boolean x = true;

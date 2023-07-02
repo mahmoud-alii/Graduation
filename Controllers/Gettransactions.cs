@@ -17,7 +17,7 @@ namespace Graduation.Controllers
     {
 
         [HttpPost]
-        [Authorize]
+        //[Authorize]
         public IActionResult gettransactions([FromBody] Transactions transactions )
         {
             ArrayList transactions_records = new ArrayList();

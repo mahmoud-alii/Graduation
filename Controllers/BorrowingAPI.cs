@@ -25,7 +25,7 @@ namespace Graduation.Controllers
     {
 
         [HttpPost]
-        [Authorize]
+        //[Authorize]
         public IActionResult borrowingAPI([FromBody] Borrowed_books borrowed_books )
         {
             DateTime today_date = DateTime.Now.Date;

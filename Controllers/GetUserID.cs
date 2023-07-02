@@ -12,7 +12,7 @@ namespace Graduation.Controllers
     public class GetUserID : ControllerBase
     {
         [HttpPost]
-        [Authorize]
+        //[Authorize]
         public IActionResult getUserID([FromBody] Has has)
         {
             int student_id = 0;
