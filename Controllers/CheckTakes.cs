@@ -44,7 +44,7 @@ namespace Graduation.Controllers
         public class Has
         {
             public int student_id { get; set; }
-            public int serial_no { get; set; }
+            public string serial_no { get; set; }
         }
             public class Attendance
         {
