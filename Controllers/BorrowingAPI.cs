@@ -158,17 +158,17 @@ namespace Graduation.Controllers
             }
             else if (total_penalty != 0 && num_books < 3)
             {
-                var message = new { message = "there is penalty {0} days on this custome " , total_penalty };
+                string message = $" there is penalty { total_penalty } days on this custome ";
                 return Ok(new { message });
             }
             else if (total_penalty == 0 && num_books >= 3)
             {
-                var message = new { message = "this customer borrowed already {0} books " , num_books };
+                string message =  $"this customer borrowed already {num_books} books ";
                 return Ok(new { message });
             }
             else
             {
-                var message = new { message = "this customer borrowed already {0} books and have penalty {1} " ,num_books , total_penalty };
+                string message = $"this customer borrowed already {num_books} books and have penalty {total_penalty} " ;
                 return Ok(new { message });
             }
         }

@@ -35,8 +35,10 @@ namespace Graduation.Controllers
             MySqlConnection cnn;
             String trial = @"server=aast-db.cf4afzenuusl.us-east-1.rds.amazonaws.com;database=library;userid=ahmed_admin;password=777888999;";
             cnn = new MySqlConnection(trial);
-            string query = $"SELECT * FROM borrowed_books WHERE student_id='{borrowed_books.student_id}'";
-            MySqlCommand command = new MySqlCommand(query, cnn);
+            //string query10 = $"SELECT bb.*, b.title AS BookTitle FROM borrowed_books bb JOIN books b ON bb.book_id = b.book_id WHERE bb.student_id = '{borrowed_books.student_id}'";
+            string queryy = $"SELECT bb.* , b.title AS TITLE FROM borrowed_books bb JOIN books b on bb.book_id = b.book_id WHERE bb.student_id = '{borrowed_books.student_id}' ";
+            //string query = $"SELECT * FROM borrowed_books WHERE student_id='{borrowed_books.student_id}'";
+            MySqlCommand command = new MySqlCommand(queryy, cnn);
             try
             {
                 cnn.Open();
@@ -48,14 +50,15 @@ namespace Graduation.Controllers
                     {
 
                         ArrayList list = new ArrayList
-                        {
+                        {   
                             reader.GetInt32(0),
                             reader.GetInt32(1),
                             reader.GetInt32(2),
                             reader.GetDateTime(3),
                             reader.GetDateTime(4),
                             reader.GetDateTime(5),
-                            reader.GetDecimal(6)
+                            reader.GetInt32(6),
+                            reader.GetString(7),
                         };
                         DateTime x = reader.GetDateTime(5);
                         DateTime y = new DateTime(1970, 1, 1);
