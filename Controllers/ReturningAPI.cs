@@ -64,7 +64,7 @@ namespace Graduation.Controllers
 
             if (total_days > 0)
             {
-                string sql = $"UPDATE borrowed_books SET penalty = '{total_days}' , returned_date = '{formattedDate}' WHERE student_id='{borrowed_books.student_id}'AND book_id='{borrowed_books.book_id}'";
+                string sql = $"UPDATE borrowed_books SET penalty = '{total_days}' , returned_date = '{formattedDate}' WHERE student_id='{borrowed_books.student_id}'AND borrowing_id='{borrowed_books.borrowing_id}'";
                 MySqlCommand cmd = new MySqlCommand(sql, cnn);
                 cmd.ExecuteNonQuery();
                 string sql2 = $"UPDATE books SET copies_available = copies_available+1  WHERE book_id='{borrowed_books.book_id}'";
@@ -77,7 +77,7 @@ namespace Graduation.Controllers
             }
             else
             {
-                string sql = $"UPDATE borrowed_books SET returned_date = '{formattedDate}' WHERE student_id='{borrowed_books.student_id}'AND book_id='{borrowed_books.book_id}'";
+                string sql = $"UPDATE borrowed_books SET returned_date = '{formattedDate}' WHERE student_id='{borrowed_books.student_id}'AND borrowing_id='{borrowed_books.borrowing_id}'";
                 MySqlCommand cmd = new MySqlCommand(sql, cnn);
                 cmd.ExecuteNonQuery();
                 string sql2 = $"UPDATE books SET copies_available = copies_available+1  WHERE book_id='{borrowed_books.book_id}'";
