@@ -33,7 +33,7 @@ namespace Graduation.Controllers
             //String trial = @"server=127.0.0.1;database=attendance;userid=root;password=;";
             String trial = @"server=aast-db.cf4afzenuusl.us-east-1.rds.amazonaws.com;database=library;userid=ahmed_admin;password=777888999;";
             cnn = new MySqlConnection(trial);
-            string query = $"SELECT due_date  FROM borrowed_books WHERE student_id='{borrowed_books.student_id}'AND book_id='{borrowed_books.book_id}' ";
+            string query = $"SELECT due_date  FROM borrowed_books WHERE student_id='{borrowed_books.student_id}'AND book_id='{borrowed_books.borrowing_id}' ";
             MySqlCommand command = new MySqlCommand(query, cnn);
 
             try
