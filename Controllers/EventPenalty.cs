@@ -57,7 +57,7 @@ namespace Graduation.Controllers
 
                         total_days = (int)difference.TotalDays;
                         
-                            if (formatedDate != "0000-00-00")
+                            if (formatedDate != "1970-01-01")
                             {
                                 cnn.Close();
                                 cnn.Open();
