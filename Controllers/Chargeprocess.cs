@@ -31,7 +31,7 @@ namespace Graduation.Controllers
             MySqlCommand cmd2 = new MySqlCommand(query, cnn);
             cmd2.ExecuteNonQuery();
             cnn.Close();
-            string message = "points added";
+            string message = "Points added successfully";
             return Ok(message);
         }
     }

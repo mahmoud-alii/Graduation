@@ -129,7 +129,7 @@ namespace Graduation.Controllers
                     MySqlCommand cmd2 = new MySqlCommand(sql2, cnn);
                     cmd2.ExecuteNonQuery();
                     cnn.Close();
-                    var message = new { message = "The Borrowed booked added " };
+                    var message = new { message = "The borrowed book added successfully" };
                     return Ok(message); ;
                 }
                 else if (num_cp == 1)
@@ -146,7 +146,7 @@ namespace Graduation.Controllers
                     MySqlCommand cmd2 = new MySqlCommand(sql2, cnn);
                     cmd2.ExecuteNonQuery();
                     cnn.Close();
-                    var message = new { message = "The Borrowed booked added and this was the last copy" };
+                    var message = new { message = "The borrowed booked added and this was the last copy" };
                     return Ok(message);
                 }
                 else
@@ -158,17 +158,17 @@ namespace Graduation.Controllers
             }
             else if (total_penalty != 0 && num_books < 3)
             {
-                string message = $" there is penalty { total_penalty } days on this custome ";
+                string message = $" There is penalty { total_penalty } days on this person";
                 return Ok(new { message });
             }
             else if (total_penalty == 0 && num_books >= 3)
             {
-                string message =  $"this customer borrowed already {num_books} books ";
+                string message =  $"This person borrowed already {num_books} books";
                 return Ok(new { message });
             }
             else
             {
-                string message = $"this customer borrowed already {num_books} books and have penalty {total_penalty} " ;
+                string message = $"This person borrowed already {num_books} books and have penalty {total_penalty} days" ;
                 return Ok(new { message });
             }
         }
