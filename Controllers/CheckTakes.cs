@@ -55,7 +55,7 @@ namespace Graduation.Controllers
             public int attended { get; set; }
         }
         [HttpPost]
-        //[Authorize]
+        [Authorize]
         public IActionResult checkTakes([FromBody] Takes takes)
         {
             Boolean x = false;

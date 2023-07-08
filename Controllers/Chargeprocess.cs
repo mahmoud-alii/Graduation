@@ -13,7 +13,7 @@ namespace Graduation.Controllers
     {
 
         [HttpPost]
-        //[Authorize]
+        [Authorize]
         public IActionResult chargeprocess([FromBody] Transactions transactions)
         {
             DateTime today_date = DateTime.Now;

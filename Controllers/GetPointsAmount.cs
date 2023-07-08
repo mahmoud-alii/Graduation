@@ -27,7 +27,7 @@ namespace Graduation.Controllers
         }
 
         [HttpPost]
-        //[Authorize]
+        [Authorize]
         public IActionResult getPointsAmount([FromBody] Points points)
         {
             int points_amount = 0;

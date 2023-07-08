@@ -11,7 +11,7 @@ namespace Graduation.Controllers
     public class GetScheduleID : ControllerBase
     {
         [HttpPost]
-        //[Authorize]
+        [Authorize]
         public IActionResult getScheduleID([FromBody] Schedules schedules)
         {
             String class_no = "";
