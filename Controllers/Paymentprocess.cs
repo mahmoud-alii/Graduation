@@ -59,12 +59,12 @@ namespace Graduation.Controllers
                 MySqlCommand cmd2 = new MySqlCommand(sql2, cnn);
                 cmd2.ExecuteNonQuery();
                 cnn.Close();
-                string message = " transcation done ";
+                string message = " Transcation done ";
                 return Ok(message);
             }
             else
             {
-                string message = "the customer doesn't have enough points ";
+                string message = "The customer doesn't have enough points ";
                 return Ok(message);
             }
         }
