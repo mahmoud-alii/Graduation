@@ -24,7 +24,7 @@ namespace Graduation.Controllers
             String trial = @"server=aast-db.cf4afzenuusl.us-east-1.rds.amazonaws.com;database=payment;userid=ahmed_admin;password=777888999;";
             cnn = new MySqlConnection(trial);
             cnn.Open();
-            string sql = $"INSERT INTO Transactions ( student_id, merchant_id , transaction_date , transaction_amount ) VALUES ( '{transactions.student_id}', '{transactions.merchant_id}','{formattedDate}' , '{x}' )";
+            string sql = $"INSERT INTO Transactions ( student_id, merchant_id , transaction_date , transaction_amount ) VALUES ( '{transactions.student_id}', 0 ,'{formattedDate}' , '{x}' )";
             MySqlCommand cmd = new MySqlCommand(sql, cnn);
             cmd.ExecuteNonQuery();
             string query = $"UPDATE points SET points_balance = points_balance + '{x}'  WHERE student_id='{transactions.student_id}'";
