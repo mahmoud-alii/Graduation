@@ -24,7 +24,7 @@ namespace Graduation.Controllers
             MySqlConnection cnn;
             String trial = @"server=aast-db.cf4afzenuusl.us-east-1.rds.amazonaws.com;database=payment;userid=ahmed_admin;password=777888999;";
             cnn = new MySqlConnection(trial);
-            string query = $"SELECT * FROM Transactions WHERE student_id='{transactions.student_id}'";
+            string query = $"SELECT * FROM Transactions WHERE student_id='{transactions.student_id}' ORDER BY transaction_id DESC";
             MySqlCommand command = new MySqlCommand(query, cnn);
             try
             {
