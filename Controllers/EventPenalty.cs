@@ -12,7 +12,7 @@ namespace Graduation.Controllers
         [HttpPost]
         public IActionResult eventPenalty()
         {
-
+            DateTime Zero = new DateTime(1970, 1, 1);
             MySqlConnection cnn;
             String trial = @"server=aast-db.cf4afzenuusl.us-east-1.rds.amazonaws.com;database=library;userid=ahmed_admin;password=777888999;";
             cnn = new MySqlConnection(trial);
@@ -22,7 +22,7 @@ namespace Graduation.Controllers
                 cnn.Open();
 
 
-                string updateSql = $"UPDATE borrowed_books SET penalty = penalty - 1 WHERE returned_date != '1970-01-01' AND penalty > 0";
+                string updateSql = $"UPDATE borrowed_books SET penalty = penalty - 1 WHERE returned_date != '{Zero}' AND penalty > 0";
                 MySqlCommand updateCmd = new MySqlCommand(updateSql, cnn);
                 updateCmd.ExecuteNonQuery();
 
